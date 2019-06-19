@@ -22,7 +22,7 @@ pod 'ImagePickerHelper'
 
 ## Author
 
-cato.chuk@gmail.com, cato@ganguo.hk
+cato.chuk@gmail.com
 
 ## License
 

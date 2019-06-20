@@ -8,17 +8,17 @@ import UIKit
 import AVFoundation
 import Photos
 
-typealias VoidBlock = () -> Void
-typealias ImageBlock = (_ image: UIImage) -> Void
-
 public class ImagePickerHelper: NSObject {
+    
+    public typealias VoidBlock = () -> Void
+    public typealias ImageBlock = (_ image: UIImage) -> Void
     
     /// 单例对象
     public static let sharedInstance = ImagePickerHelper()
     
-    private var selectedImageCompletion: ImageBlock?
-    private weak var currentViewController: UIViewController?
-    private var imagePickerVC = UIImagePickerController()
+    var selectedImageCompletion: ImageBlock?
+    weak var currentViewController: UIViewController?
+    var imagePickerVC = UIImagePickerController()
     
     //MARK: Public Method
     

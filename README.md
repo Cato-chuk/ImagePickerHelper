@@ -1,10 +1,10 @@
 # ImagePickerHelper
 
-[![CI Status](https://img.shields.io/travis/cato.chuk@gmail.com/ImagePickerHelper.svg?style=flat)](https://travis-ci.org/cato.chuk@gmail.com/ImagePickerHelper)
+[![CI Status](https://img.shields.io/badge/build-1.0.2-orange.svg)](https://travis-ci.org/cato.chuk@gmail.com/ImagePickerHelper)
 [![Version](https://img.shields.io/cocoapods/v/ImagePickerHelper.svg?style=flat)](https://cocoapods.org/pods/ImagePickerHelper)
 [![License](https://img.shields.io/cocoapods/l/ImagePickerHelper.svg?style=flat)](https://cocoapods.org/pods/ImagePickerHelper)
 [![Platform](https://img.shields.io/cocoapods/p/ImagePickerHelper.svg?style=flat)](https://cocoapods.org/pods/ImagePickerHelper)
-[![Swift](https://img.shields.io/badge/Swift-4.2-blue.svg)](https://cocoapods.org/pods/ImagePickerHelper)
+[![Swift](https://img.shields.io/badge/swift-4.2-blue.svg)](https://cocoapods.org/pods/ImagePickerHelper)
 
 ## Example
 

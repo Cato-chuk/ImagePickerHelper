@@ -1,6 +1,6 @@
 {
   "name": "ImagePickerHelper",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "summary": "iOS 照片选择组件",
   "description": "一个方便的、可扩展使用自定义照片选择器的 Helper，访问相册/相机前自动检测权限，避免 Crash。",
   "homepage": "https://github.com/Cato-chuk/ImagePickerHelper",
@@ -13,15 +13,17 @@
   },
   "source": {
     "git": "https://github.com/Cato-chuk/ImagePickerHelper.git",
-    "tag": "0.1.0"
+    "tag": "1.0.2"
   },
   "platforms": {
     "ios": "10.0"
   },
+  "swift_versions": "4.2",
   "source_files": "ImagePickerHelper/Classes/",
   "frameworks": [
     "UIKit",
     "AVFoundation",
     "Photos"
-  ]
+  ],
+  "swift_version": "4.2"
 }

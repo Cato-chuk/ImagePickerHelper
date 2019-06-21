@@ -10,13 +10,13 @@ import Photos
 
 public class ImagePickerHelper: NSObject {
     
-    public typealias VoidBlock = () -> Void
-    public typealias ImageBlock = (_ image: UIImage) -> Void
+    public typealias VoidClosure = () -> Void
+    public typealias ImageClosure = (_ image: UIImage) -> Void
     
     /// 单例对象
     public static let sharedInstance = ImagePickerHelper()
     
-    var selectedImageCompletion: ImageBlock?
+    var selectedImageCompletion: ImageClosure?
     weak var currentViewController: UIViewController?
     var imagePickerVC = UIImagePickerController()
     
@@ -29,7 +29,7 @@ public class ImagePickerHelper: NSObject {
     ///   - message: ActionSheet 显示的信息
     ///   - controller: 当前需要显示 ActionSheet 的 Controller
     ///   - completion: 选择照片完成后执行的 Closure
-    public func showObtainPhotoOptionSheet(withTipsTitle title: String, message: String, controller: UIViewController, completion: @escaping ImageBlock) {
+    public func showObtainPhotoOptionSheet(withTipsTitle title: String, message: String, controller: UIViewController, completion: @escaping ImageClosure) {
         currentViewController = controller
         selectedImageCompletion = completion
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -38,7 +38,7 @@ public class ImagePickerHelper: NSObject {
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let camera = UIAlertAction(title: "相机", style: .default) { (action) in
-                self.cameraPermissions(deniedBlock: nil)
+                self.cameraPermissions(deniedClosure: nil)
             }
             alertVC.addAction(camera)
         }
@@ -57,7 +57,7 @@ public class ImagePickerHelper: NSObject {
     /// - Parameters:
     ///   - controller: 负责 present UIImagePickerController(.photoLibrary) 的 Controller
     ///   - completion: 选择照片完成后执行的 Closure
-    public func showPhotoLibrary(byController controller: UIViewController, completion: @escaping ImageBlock) {
+    public func showPhotoLibrary(byController controller: UIViewController, completion: @escaping ImageClosure) {
         currentViewController = controller
         selectedImageCompletion = completion
         photoAlbumPermissions()
@@ -69,10 +69,10 @@ public class ImagePickerHelper: NSObject {
     /// - Parameters:
     ///   - controller: 负责 present UIImagePickerController(.camera) 的 Controller
     ///   - completion: 选择照片完成后执行的 Closure
-    public func showCamera(byController controller: UIViewController, completion: @escaping ImageBlock) {
+    public func showCamera(byController controller: UIViewController, completion: @escaping ImageClosure) {
         currentViewController = controller
         selectedImageCompletion = completion
-        cameraPermissions(deniedBlock: nil)
+        cameraPermissions(deniedClosure: nil)
     }
     
     //MARK: Check photo permission
@@ -80,22 +80,22 @@ public class ImagePickerHelper: NSObject {
     ///
     /// - Parameters:
     ///   - callSystemImagePicker: 是否使用系统的相册图库来选择图片
-    ///   - authorizedBlock: 权限验证成功后执行的 Closure
-    ///   - deniedBlock: 权限被拒绝后执行的 Closure
-    public func photoAlbumPermissions(callSystemImagePicker: Bool = true, authorizedBlock: @escaping VoidBlock = {}, deniedBlock: @escaping VoidBlock = {}) {
+    ///   - authorizedClosure: 权限验证成功后执行的 Closure
+    ///   - deniedClosure: 权限被拒绝后执行的 Closure
+    public func photoAlbumPermissions(callSystemImagePicker: Bool = true, authorizedClosure: @escaping VoidClosure = {}, deniedClosure: @escaping VoidClosure = {}) {
         let authStatus = PHPhotoLibrary.authorizationStatus()
         
         if authStatus == .notDetermined {
             PHPhotoLibrary.requestAuthorization { (status: PHAuthorizationStatus) -> Void in
-                self.photoAlbumPermissions(authorizedBlock: authorizedBlock, deniedBlock: deniedBlock)
+                self.photoAlbumPermissions(authorizedClosure: authorizedClosure, deniedClosure: deniedClosure)
             }
         } else if authStatus == .authorized  {
-            authorizedBlock()
+            authorizedClosure()
             if callSystemImagePicker {
                 showPhotoPickerController(sourceType: .photoLibrary)
             }
         } else {
-            deniedBlock()
+            deniedClosure()
         }
     }
     
@@ -104,18 +104,18 @@ public class ImagePickerHelper: NSObject {
     
     /// 相机的权限验证
     ///
-    /// - Parameter deniedBlock: 权限被拒绝后执行的 Closure
-    private func cameraPermissions(deniedBlock: VoidBlock?) {
+    /// - Parameter deniedClosure: 权限被拒绝后执行的 Closure
+    private func cameraPermissions(deniedClosure: VoidClosure?) {
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         
         if authStatus == .notDetermined {
             AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
-                self.cameraPermissions(deniedBlock: deniedBlock)
+                self.cameraPermissions(deniedClosure: deniedClosure)
             })
         } else if authStatus == .authorized {
             showPhotoPickerController(sourceType: .camera)
         } else {
-            deniedBlock?()
+            deniedClosure?()
         }
     }
     

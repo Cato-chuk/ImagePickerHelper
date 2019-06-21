@@ -6,13 +6,16 @@
 [![Platform](https://img.shields.io/cocoapods/p/ImagePickerHelper.svg?style=flat)](https://cocoapods.org/pods/ImagePickerHelper)
 [![Swift](https://img.shields.io/badge/swift-4.2-blue.svg)](https://cocoapods.org/pods/ImagePickerHelper)
 
+一个方便的、可扩展使用自定义照片选择器的 Helper，访问相册/相机前自动检测权限，避免 Crash。
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
 
-Swift Version: 4.2
+- iOS 10.0+
+- Swift Version: 4.2+
 
 ## Installation
 
